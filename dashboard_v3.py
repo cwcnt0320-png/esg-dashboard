@@ -166,7 +166,7 @@ if latest_valid is not None:
         st.markdown(
             f'<div style="background:#E3F2FD; border-left:8px solid #1565C0; padding:20px; '
             f'border-radius:8px; margin:10px 0;">'
-            f'<h2 style="color:#1565C0; margin:0;">참고</h2>'
+            f'<h2 style="color:#1565C0; margin:0;">보수적 공시</h2>'
             f'<p style="font-size:18px; margin:8px 0 0 0;"><b>{info["label"]}</b> - {info["desc"]}</p></div>',
             unsafe_allow_html=True
         )
