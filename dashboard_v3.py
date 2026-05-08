@@ -43,8 +43,14 @@ if not check_password():
     st.stop()
 
 # ── 데이터 로드 (실명) ──
+def _data_mtime():
+    p1 = Path("./output/di_all60_finbert.xlsx")
+    p2 = Path("./output/stock_volatility_quarterly.csv")
+    return (p1.stat().st_mtime if p1.exists() else 0,
+            p2.stat().st_mtime if p2.exists() else 0)
+
 @st.cache_data
-def load_data():
+def load_data(_mtime=None):
     import warnings
     warnings.filterwarnings("ignore")
     df = pd.read_excel(Path("./output/di_all60_finbert.xlsx"),
@@ -71,7 +77,7 @@ def load_data():
                       on=["기업명","분기"], how="left")
     return df
 
-df = load_data()
+df = load_data(_data_mtime())
 
 TYPE_INFO = {
     "A. 총체적과장형": {"icon": "[A]", "color": "#EF5350", "label": "총체적과장형", "desc": "외부 공시와 내부 평판 모두 실제보다 과장 (그린워싱 위험 높음)", "risk": 5},
